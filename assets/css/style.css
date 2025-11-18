@@ -792,6 +792,7 @@ main {
 .project-item.active {
   display: block;
   animation: scaleUp 0.25s ease forwards;
+  text-align: center;
 }
 
 @keyframes scaleUp {
@@ -903,12 +904,14 @@ main {
   overflow: hidden;
   background: var(--border-gradient-onyx);
   box-shadow: var(--shadow-4);
+  justify-content: center;
 }
 
 /* Image container */
 .gallery-banner-box {
   width: 100%;
   display: block;
+  margin: 0 auto;
 }
 
 /* Images behave like Pinterest: keep original ratios */
@@ -918,6 +921,7 @@ main {
   object-fit: cover;
   display: block;
   transition: transform .3s ease;
+  margin: 0 auto;
 }
 
 /* Hover zoom effect */
@@ -1710,5 +1714,6 @@ textarea.form-input::-webkit-resizer { display: none; }
 	 */
 
   .timeline-text { max-width: 700px; }
+
 
 }
