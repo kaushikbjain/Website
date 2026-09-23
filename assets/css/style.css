@@ -2662,6 +2662,285 @@ article[data-page].active {
   .intro-stage { padding: 0 20px; }
 }
 
+/*-----------------------------------*\
+  #MOBILE CINEMATIC ENHANCEMENTS
+  Subtle aura, tactile touch states,
+  frosted dock, and ambient depth.
+  Strictly scoped to mobile devices (<= 768px)
+\*-----------------------------------*/
+
+@media (max-width: 768px) {
+
+  /* ---------- subtle ambient top-right gold spotlight ---------- */
+  body::before {
+    content: "";
+    position: fixed;
+    top: -40px;
+    right: -40px;
+    width: 240px;
+    height: 240px;
+    border-radius: 50%;
+    background: radial-gradient(circle, hsla(45, 100%, 65%, 0.08) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  /* ---------- mobile ambient toggle repositioning (absolute so it doesn't float over text) ---------- */
+  #ambient-toggle {
+    position: absolute;
+    top: 14px;
+    left: auto;
+    right: 14px;
+    padding: 6px 12px;
+    font-size: 10px;
+    background: hsla(0, 0%, 8%, 0.7);
+    border-color: hsla(45, 75%, 60%, 0.3);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 4px 16px hsla(0, 0%, 0%, 0.5);
+  }
+
+  #ambient-toggle:active {
+    transform: scale(0.93);
+    border-color: hsla(45, 95%, 65%, 0.7);
+  }
+
+  /* ---------- mobile avatar breathing aura ---------- */
+  .sidebar-info .avatar-box {
+    border-radius: 24px;
+    box-shadow: 0 0 0 1.5px hsla(45, 80%, 60%, 0.3), 0 0 20px hsla(45, 100%, 65%, 0.15);
+    animation: mobAvatarAura 4s ease-in-out infinite alternate;
+  }
+
+  @keyframes mobAvatarAura {
+    0% {
+      box-shadow: 0 0 0 1.5px hsla(45, 80%, 60%, 0.25), 0 0 16px hsla(45, 100%, 65%, 0.12);
+    }
+    100% {
+      box-shadow: 0 0 0 2px hsla(45, 95%, 65%, 0.45), 0 0 28px hsla(45, 100%, 65%, 0.28);
+    }
+  }
+
+  /* ---------- title badges & status pulse ---------- */
+  .title-stack .title-primary {
+    background: hsla(45, 100%, 65%, 0.06);
+    border-color: hsla(45, 80%, 65%, 0.32);
+    box-shadow: 0 2px 8px hsla(0, 0%, 0%, 0.3);
+  }
+
+  .title-stack .title-secondary {
+    background: hsla(0, 0%, 14%, 0.65);
+    border-color: hsla(45, 60%, 55%, 0.24);
+  }
+
+  .title-stack .title-secondary::before {
+    box-shadow: 0 0 8px hsla(45, 100%, 65%, 0.85);
+    animation: mobStatusPulse 2.4s ease-in-out infinite alternate;
+  }
+
+  @keyframes mobStatusPulse {
+    0% {
+      transform: scale(0.9);
+      opacity: 0.7;
+      box-shadow: 0 0 6px hsla(45, 100%, 65%, 0.6);
+    }
+    100% {
+      transform: scale(1.25);
+      opacity: 1;
+      box-shadow: 0 0 14px hsla(45, 100%, 65%, 0.95);
+    }
+  }
+
+  /* ---------- section heading underline dynamic gleam ---------- */
+  .article-title::after {
+    background: linear-gradient(90deg, var(--gold-1) 0%, var(--gold-3) 40%, var(--gold-1) 80%);
+    background-size: 200% 100%;
+    animation: titleLineGleam 4s ease-in-out infinite;
+  }
+
+  @keyframes titleLineGleam {
+    0%   { background-position: 100% 0; }
+    100% { background-position: -100% 0; }
+  }
+
+  /* ---------- mobile cards — ambient glass illumination ---------- */
+  .service-item,
+  .content-card,
+  .project-item > a,
+  .gallery-post-item > a {
+    background-image: radial-gradient(ellipse at 85% 0%, hsla(45, 100%, 70%, 0.05), transparent 60%);
+    border-color: hsla(45, 60%, 55%, 0.2);
+    box-shadow: 0 4px 18px hsla(0, 0%, 0%, 0.35);
+  }
+
+  /* subtle warm gold halo behind service icons */
+  .service-icon-box {
+    position: relative;
+  }
+
+  .service-icon-box::before {
+    content: "";
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    background: radial-gradient(circle, hsla(45, 100%, 65%, 0.16) 0%, transparent 70%);
+    pointer-events: none;
+    animation: mobIconHalo 3.6s ease-in-out infinite alternate;
+  }
+
+  @keyframes mobIconHalo {
+    0%   { opacity: 0.4; transform: scale(0.9); }
+    100% { opacity: 1;   transform: scale(1.15); }
+  }
+
+  .service-icon-box img {
+    animation: mobIconFloat 4s ease-in-out infinite alternate;
+  }
+
+  @keyframes mobIconFloat {
+    0%   { transform: translateY(0); }
+    100% { transform: translateY(-3px); }
+  }
+
+  /* ---------- tactile touch feedback for mobile cards ---------- */
+  .service-item:active,
+  .content-card:active,
+  .project-item > a:active,
+  .gallery-post-item > a:active,
+  .timeline-item:active {
+    transform: scale(0.985);
+    border-color: hsla(45, 95%, 65%, 0.45);
+    box-shadow: 0 0 16px hsla(45, 100%, 65%, 0.2);
+    transition: transform 0.12s ease, border-color 0.12s ease, box-shadow 0.12s ease;
+  }
+
+  /* project thumbnail styling & smooth press feedback */
+  .project-img {
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid hsla(45, 60%, 55%, 0.2);
+    box-shadow: 0 6px 20px hsla(0, 0%, 0%, 0.4);
+  }
+
+  .project-img img {
+    transition: transform 0.4s ease;
+  }
+
+  .project-item > a:active .project-img img {
+    transform: scale(1.025);
+  }
+
+  .project-title {
+    font-size: 14px;
+    margin-top: 10px;
+    letter-spacing: -0.2px;
+  }
+
+  .project-category {
+    font-size: 11px;
+    color: var(--vegas-gold);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  /* gallery card mobile framing & micro chip */
+  .gallery-post-item > a {
+    border-radius: 14px;
+    border: 1px solid hsla(45, 60%, 55%, 0.2);
+    box-shadow: 0 6px 20px hsla(0, 0%, 0%, 0.4);
+    overflow: hidden;
+  }
+
+  .gallery-banner-box img {
+    transition: transform 0.4s ease;
+  }
+
+  .gallery-post-item > a:active .gallery-banner-box img {
+    transform: scale(1.025);
+  }
+
+  .gallery-post-item > a::after {
+    opacity: 0.85;
+    transform: translateY(0);
+    bottom: 8px;
+    left: 8px;
+    font-size: 8px;
+    padding: 3px 8px;
+    letter-spacing: 1px;
+  }
+
+  /* category filter select tactile touch feedback */
+  .filter-select {
+    border-color: hsla(45, 60%, 55%, 0.25);
+    background: hsla(240, 1%, 17%, 0.8);
+    box-shadow: 0 2px 10px hsla(0, 0%, 0%, 0.3);
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .filter-select:active {
+    border-color: hsla(45, 95%, 65%, 0.6);
+    box-shadow: 0 0 12px hsla(45, 100%, 65%, 0.25);
+  }
+
+  /* ---------- floating frosted bottom navigation dock ---------- */
+  .navbar {
+    background: hsla(0, 0%, 9%, 0.85);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-top: 1px solid hsla(45, 70%, 60%, 0.28);
+    box-shadow: 0 -8px 30px hsla(0, 0%, 0%, 0.7), 0 -1px 12px hsla(45, 100%, 65%, 0.14);
+  }
+
+  .navbar-list {
+    gap: 8px;
+    padding: 0 12px;
+  }
+
+  .navbar-link {
+    font-size: 13px;
+    padding: 14px 16px;
+    border-radius: 12px;
+    transition: color 0.25s ease, background 0.25s ease, transform 0.2s ease;
+  }
+
+  .navbar-link:active {
+    transform: scale(0.93);
+  }
+
+  .navbar-link.active {
+    background: hsla(45, 100%, 65%, 0.08);
+    text-shadow: 0 0 12px hsla(45, 100%, 65%, 0.7);
+  }
+
+  .navbar-link.active::before {
+    width: 36%;
+    height: 3px;
+    border-radius: 2px;
+    background: var(--text-gradient-yellow);
+    box-shadow: 0 0 10px hsla(45, 100%, 65%, 0.9);
+    bottom: 6px;
+  }
+
+  /* social contact buttons touch feedback */
+  .social-item .social-link {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: hsla(240, 1%, 17%, 0.6);
+    border: 1px solid hsla(45, 60%, 55%, 0.2);
+  }
+
+  .social-item .social-link:active {
+    transform: scale(0.92);
+    border-color: hsla(45, 95%, 65%, 0.6);
+    box-shadow: 0 0 10px hsla(45, 100%, 65%, 0.35);
+  }
+
+}
+
 /* respect reduced motion — extend the existing rule's intent to the new layer */
 @media (prefers-reduced-motion: reduce) {
   .video-bg { animation: none !important; transform: translate(-50%, -50%) scale(1.08) !important; }
