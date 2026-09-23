@@ -344,11 +344,32 @@ main {
   justify-content: flex-start;
   align-items: center;
   gap: 15px;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .avatar-box {
+  flex-shrink: 0;
+  width: 80px;
+  height: 80px;
+  aspect-ratio: 1;
   background: var(--bg-gradient-onyx);
   border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.avatar-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.info-content {
+  min-width: 0;
+  flex: 1;
 }
 
 .info-content .name {
@@ -1351,9 +1372,17 @@ textarea.form-input::-webkit-resizer { display: none; }
 
   .sidebar-info { gap: 25px; }
 
-  .avatar-box { border-radius: 30px; }
+  .avatar-box {
+    width: 120px;
+    height: 120px;
+    border-radius: 30px;
+  }
 
-  .avatar-box img { width: 120px; }
+  .avatar-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 
   .info-content .name { margin-bottom: 15px; }
 
@@ -1872,7 +1901,16 @@ textarea.form-input::-webkit-resizer { display: none; }
 
   .sidebar-info { flex-direction: column; }
 
-  .avatar-box img { width: 150px; }
+  .avatar-box {
+    width: 150px;
+    height: 150px;
+  }
+
+  .avatar-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 
   .info-content .name {
     white-space: nowrap;
@@ -2685,16 +2723,22 @@ article[data-page].active {
     z-index: -1;
   }
 
-  /* ---------- mobile ambient toggle repositioning (absolute so it doesn't float over text) ---------- */
+  /* ---------- mobile layout spacing ---------- */
+  main {
+    margin-top: 52px;
+  }
+
+  /* ---------- mobile ambient toggle in top header space ---------- */
   #ambient-toggle {
-    position: absolute;
+    position: fixed;
     top: 14px;
     left: auto;
-    right: 14px;
+    right: 16px;
+    z-index: 99;
     padding: 6px 12px;
     font-size: 10px;
-    background: hsla(0, 0%, 8%, 0.7);
-    border-color: hsla(45, 75%, 60%, 0.3);
+    background: hsla(0, 0%, 8%, 0.8);
+    border-color: hsla(45, 75%, 60%, 0.35);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     box-shadow: 0 4px 16px hsla(0, 0%, 0%, 0.5);
@@ -2719,6 +2763,42 @@ article[data-page].active {
     100% {
       box-shadow: 0 0 0 2px hsla(45, 95%, 65%, 0.45), 0 0 28px hsla(45, 100%, 65%, 0.28);
     }
+  }
+
+  /* ---------- mobile header sizing & overflow protection ---------- */
+  .sidebar-info {
+    min-width: 0;
+    max-width: 100%;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .info-content {
+    min-width: 0;
+    flex: 1;
+    overflow: hidden;
+  }
+
+  .info-content .name {
+    font-size: 20px;
+    margin-bottom: 6px;
+    word-break: break-word;
+  }
+
+  .info-content .title-stack {
+    width: 100%;
+    max-width: 100%;
+    gap: 5px;
+  }
+
+  .info-content .title {
+    width: auto;
+    max-width: 100%;
+    font-size: 11px;
+    white-space: normal;
+    word-break: break-word;
+    text-align: left;
+    padding: 3px 10px;
   }
 
   /* ---------- title badges & status pulse ---------- */
@@ -2939,6 +3019,26 @@ article[data-page].active {
     box-shadow: 0 0 10px hsla(45, 100%, 65%, 0.35);
   }
 
+  /* landscape compact dock on short mobile screens */
+  @media (max-height: 500px) and (orientation: landscape) {
+    .navbar {
+      padding-bottom: 2px;
+    }
+    .navbar-link {
+      padding: 8px 12px;
+      font-size: 11px;
+    }
+    main {
+      margin-bottom: 55px;
+    }
+  }
+
+}
+
+/* global horizontal overflow safeguard */
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 /* respect reduced motion — extend the existing rule's intent to the new layer */
